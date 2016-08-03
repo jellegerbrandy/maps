@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>polynomial</title>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no"/>
+    <script src="https://maps.google.com/maps/api/js?sensor=false"></script>
+    <script>
+      function init() {
+        var mapBounds = new google.maps.LatLngBounds(
+            new google.maps.LatLng(21.103745, -48.606706),
+            new google.maps.LatLng(80.996573, 110.868414));
+        var mapMinZoom = 0;
+        var mapMaxZoom = 7;
+        var opts = {
+          streetViewControl: false,
+          tilt: 0,
+          mapTypeId: google.maps.MapTypeId.HYBRID,
+          center: new google.maps.LatLng(0,0),
+          zoom: mapMinZoom
+        }
+        var map = new google.maps.Map(document.getElementById("map"), opts);
+        
+        // https://developers.google.com/maps/documentation/javascript/examples/maptype-image-overlay
+        var imageMapType = new google.maps.ImageMapType({
+            getTileUrl: function(coord, zoom) {
+              var proj = map.getProjection();
+              var z2 = Math.pow(2, zoom);
+              var tileXSize = 256 / z2;
+              var tileYSize = 256 / z2;
+              var tileBounds = new google.maps.LatLngBounds(
+                proj.fromPointToLatLng(new google.maps.Point(coord.x * tileXSize, (coord.y + 1) * tileYSize)),
+                proj.fromPointToLatLng(new google.maps.Point((coord.x + 1) * tileXSize, coord.y * tileYSize))
+              );
+              if (!mapBounds.intersects(tileBounds) || zoom < mapMinZoom || zoom > mapMaxZoom) return null;
+              return ["http://georeferencer-0.tileserver.com//e19da25f63571dda040581099ce6bea677e29d20/map/bcoPxzC4fPzEABr1WEqX25/201607280812-nPHIlo/polynomial/{z}/{x}/{y}.png","http://georeferencer-1.tileserver.com//e19da25f63571dda040581099ce6bea677e29d20/map/bcoPxzC4fPzEABr1WEqX25/201607280812-nPHIlo/polynomial/{z}/{x}/{y}.png","http://georeferencer-2.tileserver.com//e19da25f63571dda040581099ce6bea677e29d20/map/bcoPxzC4fPzEABr1WEqX25/201607280812-nPHIlo/polynomial/{z}/{x}/{y}.png","http://georeferencer-3.tileserver.com//e19da25f63571dda040581099ce6bea677e29d20/map/bcoPxzC4fPzEABr1WEqX25/201607280812-nPHIlo/polynomial/{z}/{x}/{y}.png"][(coord.x+coord.y)%4].replace('{z}',zoom).replace('{x}',coord.x).replace('{y}',coord.y);
+            },
+            tileSize: new google.maps.Size(256, 256),
+            minZoom: mapMinZoom,
+            maxZoom: mapMaxZoom,
+            name: 'Tiles'
+        });
+
+        map.overlayMapTypes.push(imageMapType);
+        map.fitBounds(mapBounds);
+      }
+    </script>
+    <style>
+      html, body, #map { width:100%; height:100%; margin:0; padding:0; }
+    </style>
+  </head>
+  <body onload="init()">
+    <div id="map"></div>
+  </body>
+</html>
