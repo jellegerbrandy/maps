@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2" xmlns:gx="http://www.google.com/kml/ext/2.2">
+  <Document>
+    <visibility>1</visibility>
+    <Style>
+      <ListStyle id="hideChildren">
+        <listItemType>checkHideChildren</listItemType>
+      </ListStyle>
+    </Style>
+    <ScreenOverlay>
+  <Icon>https://georeferencer3.appspot.com/img/pilot-rumsey-logo.png</Icon>
+  <overlayXY x="-30" y="-30" xunits="pixels" yunits="pixels"/>
+  <screenXY x="0" y="0" xunits="fraction" yunits="fraction"/>
+</ScreenOverlay>
+<NetworkLink>
+  <name>0_0_0</name>
+  <Region>
+  <Lod>
+    <minLodPixels>128</minLodPixels>
+    <maxLodPixels>-1</maxLodPixels>
+  </Lod>
+  <LatLonAltBox>
+    <west>-42.191605</west>
+    <south>31.247400</south>
+    <east>93.666277</east>
+    <north>76.963885</north>
+  </LatLonAltBox>
+</Region>
+  <Link>
+    <href>http://rumsey.georeferencer.com/map/bcoPxzC4fPzEABr1WEqX25/201607271553-JqXDY2.kmz?z=0&amp;%78=0&amp;%79=0&amp;layer=0</href>
+    <viewRefreshMode>onRegion</viewRefreshMode>
+  </Link>
+</NetworkLink>
+<Region>
+  <Lod>
+    <minLodPixels>0</minLodPixels>
+    <maxLodPixels>-1</maxLodPixels>
+  </Lod>
+  <LatLonAltBox>
+    <west>-42.191605</west>
+    <south>31.247400</south>
+    <east>93.666277</east>
+    <north>76.963885</north>
+  </LatLonAltBox>
+</Region>
+  </Document>
+</kml>
